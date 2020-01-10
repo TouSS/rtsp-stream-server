@@ -25,9 +25,14 @@
   },
   "homepage": "https://github.com/TouSS/rtsp-stream-server#readme",
   "dependencies": {
+    "crypto": "^1.0.1",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "ws": "^7.2.1"
+  },
+  "devDependencies": {
+    "pm2": "^4.2.1"
   }
 }

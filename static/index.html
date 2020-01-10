@@ -1,0 +1,28 @@
+<html>
+
+<body>
+	<input type="text" id="rtsp" value="">
+	<input type="button" value="连接" onclick="link()">
+	<div>
+		<canvas id="canvas"></canvas>
+	</div>
+</body>
+
+<script type="text/javascript" src="js/jsmpeg.min.js"></script>
+<script type="text/javascript" src="js/axios.min.js"></script>
+<script type="text/javascript">
+	function link() {
+		let url = document.getElementById('rtsp').value;
+		axios.post('/rtsp', {url: url}).then(resp => {
+			console.log(resp)
+			player = new JSMpeg.Player('ws://192.168.1.4:3000/' + resp.data.channel, {
+				canvas: document.getElementById('canvas')
+			})
+		}).catch(err => {
+			console.error(err);
+		});
+	}
+		
+</script>
+
+</html>
