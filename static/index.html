@@ -1,28 +1,59 @@
 <html>
 
+<head>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<style>
+		.container {
+			max-width: 800px;
+		}
+	</style>
+</head>
+
 <body>
-	<input type="text" id="rtsp" value="">
-	<input type="button" value="连接" onclick="link()">
-	<div>
-		<canvas id="canvas"></canvas>
-	</div>
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page">Play video from rtsp stram</li>
+			</ol>
+		</nav>
+		<div class="input-group mb-3">
+			<input type="text" id="rtsp" class="form-control" placeholder="insert the rtsp stram url"
+				aria-label="Recipient's username" aria-describedby="button-paly">
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" type="button" id="button-paly" onclick="link()">PLAY</button>
+			</div>
+		</div>
+		<div class="card">
+			<canvas id="video" style="width: 100%;"></canvas>
+		</div>
+
 </body>
 
 <script type="text/javascript" src="js/jsmpeg.min.js"></script>
 <script type="text/javascript" src="js/axios.min.js"></script>
 <script type="text/javascript">
+	window.onload = function () {
+		let videoCanvas = document.getElementById('video')
+		let width = videoCanvas.clientWidth
+		videoCanvas.style.height = Math.floor(width * 9 / 16) + 'px'
+	}
 	function link() {
 		let url = document.getElementById('rtsp').value;
-		axios.post('/rtsp', {url: url}).then(resp => {
-			console.log(resp)
-			player = new JSMpeg.Player('ws://localhost:3000/' + resp.data.channel, {
-				canvas: document.getElementById('canvas')
+		axios.post('/rtsp', { url: url }).then(resp => {
+			if(window.player) {
+				window.player.stop();
+			}
+			window.player = new JSMpeg.Player(`ws://${location.host}/` + resp.data.channel, {
+				canvas: document.getElementById('video'),
+				onPlay: function(player) {
+					// you can do something at this event..
+				}
 			})
 		}).catch(err => {
 			console.error(err);
 		});
 	}
-		
+
 </script>
 
 </html>
