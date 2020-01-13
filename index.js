@@ -1,6 +1,7 @@
 const http = require('http')
 const Koa = require('koa')
-const body = require('koa-body')
+const Body = require('koa-body')
+const Cors = require('koa2-cors')
 const Router = require('koa-router')
 
 const VideoServer = require('./lib/video.server')
@@ -10,13 +11,16 @@ const httpServer = http.createServer(app.callback())
 const router = new Router()
 const videoServer = new VideoServer(httpServer)
 
+//允许跨域
+app.use(Cors({ origin: '*' }))
+
 // 静态资源目录
 app.use(require('koa-static')(__dirname + '/static', {
     maxage: 1000 * 60 * 10 // 浏览器缓存时间（毫秒）
 }))
 
 // 参数对象处理
-app.use(body())
+app.use(Body())
 
 // 路由
 router.post('/rtsp', (ctx, next) => {
