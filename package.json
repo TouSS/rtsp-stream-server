@@ -32,7 +32,16 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
-    "ws": "^7.4.6"
+    "ws": "^7.4.6",
+    "lodash": "^4.17.21",
+    "axios": "^0.26.1",
+    "glob-parent": "^6.0.2",
+    "shelljs": "^0.8.5",
+    "pac-resolver": "^5.0.0",
+    "systeminformation": "^5.11.8",
+    "follow-redirects": "^1.14.9",
+    "minimist": "^1.2.5"
+    
   },
   "devDependencies": {
     "pm2": "^4.2.1"
