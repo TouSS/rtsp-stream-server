@@ -39,7 +39,7 @@
     "shelljs": "^0.8.5",
     "pac-resolver": "^5.0.0",
     "systeminformation": "^5.11.8",
-    "follow-redirects": "^1.14.9",
+    "follow-redirects": "^1.14.8",
     "minimist": "^1.2.5"
     
   },
